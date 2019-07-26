@@ -1,0 +1,17 @@
+{
+  "name": "Art-Portfolio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^3.20.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
