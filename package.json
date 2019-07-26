@@ -1,10 +1,10 @@
 {
-  "name": "Art-Portfolio",
+  "name": "art-portfolio",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "nodemon --exec babel-node -- index.js",
     "start": "node index.js"
   },
   "dependencies": {
@@ -12,6 +12,10 @@
     "helmet": "^3.20.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "eslint": "^6.1.0",
     "eslint-plugin-react": "^7.14.3",
     "nodemon": "^1.19.1"
