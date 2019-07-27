@@ -1,4 +1,4 @@
-import db from '../db/dbConfig'
+import db from '../db/dbConfig';
 
 const table = 'users';
 

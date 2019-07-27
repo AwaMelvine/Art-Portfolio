@@ -18,4 +18,11 @@ app.use('*', (req, res) => {
     res.status(404).json({ error: 'Page Not Found' });
 });
 
+
+const { PORT = 8000, DB_ENV } = process.env;
+
+if (DB_ENV !== 'testing') {
+    app.listen(PORT, console.log(`***  Server running on localhost:${PORT}  ***`));
+}
+
 export default app;
