@@ -3,11 +3,15 @@ import db from '../db/dbConfig'
 const table = 'users';
 
 export default {
-    async find(id = null) {
+    async get(id = null) {
         if (id) {
             return await db(table).where({ id }).first();
         }
         return db(table);
+    },
+
+    async find(columns) {
+        return await db(table).where(columns).first();
     },
 
     async insert(user) {
