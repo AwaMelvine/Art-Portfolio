@@ -6,9 +6,11 @@ const table = 'users';
 export default {
     async get(id = null) {
         if (id) {
-            return await db(table).where({ id }).first();
+            const user = await db(table).where({ id }).first();
+            return user;
         }
-        return db(table);
+        const users = await db(table);
+        return users;
     },
 
     async find(columns) {

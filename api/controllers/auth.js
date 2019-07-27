@@ -18,7 +18,7 @@ export const createToken = (user) => {
 
 
 export const getUsers = async (req, res) => {
-    const users = await User.find();
+    const users = await User.get();
     res.status(200).json({ data: users });
 }
 
