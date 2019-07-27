@@ -5,7 +5,13 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --exec babel-node -- index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "migrate": "knex migrate:latest",
+    "migrate:test": "knex migrate:latest --env testing",
+    "migrate:rollback": "knex migrate:rollback",
+    "migrate:rollback:test": "knex migrate:rollback  --env testing",
+    "seed": "knex seed:run",
+    "seed:test": "knex seed:run --env testing"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -24,6 +30,8 @@
     "@babel/preset-env": "^7.5.5",
     "eslint": "^6.1.0",
     "eslint-plugin-react": "^7.14.3",
-    "nodemon": "^1.19.1"
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   }
 }
