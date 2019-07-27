@@ -42,26 +42,26 @@ afterAll(async () => {
 
 describe('User Model', () => {
     it('gets an array of all users', async () => {
-        const users = await User.find();
+        const users = await User.get();
         expect(users.length).toBe(2);
     });
     it('gets a user by Id', async () => {
-        const user = await User.find(1);
+        const user = await User.get(1);
         expect(user.email).toBe('john@john.com');
     });
     it('creates a new user', async () => {
         await User.insert(user);
-        const users = await User.find();
+        const users = await User.get();
         expect(users.length).toBe(3);
     });
     it('updates user info', async () => {
         await User.update(3, changes);
-        const updatedUser = await User.find(3);
+        const updatedUser = await User.get(3);
         expect(updatedUser.username).toEqual('Melvine Awa');
     });
     it('deletes a user', async () => {
         await User.remove(3);
-        const users = await User.find();
+        const users = await User.get();
         expect(users.length).toBe(2);
     });
     xit('gets a user\'s posts given the user id', async () => {
