@@ -1,8 +1,7 @@
-import { config } from 'dotenv';
+require('dotenv').config();
 
-config();
 
-export default {
+module.exports = {
 
   development: {
     client: 'postgresql',
@@ -14,6 +13,9 @@ export default {
     migrations: {
       directory: './api/db/migrations/',
       tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: './api/db/seeds',
     }
   },
 
@@ -27,6 +29,9 @@ export default {
     migrations: {
       directory: './api/db/migrations/',
       tableName: 'knex_migrations'
+    },  
+    seeds: {
+      directory: './api/db/seeds',
     }
   },
 
@@ -40,6 +45,9 @@ export default {
     migrations: {
       directory: './api/db/migrations/',
       tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: './api/db/seeds',
     }
   }
 
