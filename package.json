@@ -6,10 +6,8 @@
   "scripts": {
     "dev": "nodemon --exec babel-node -- index.js",
     "start": "node index.js",
-    "migrate": "knex migrate:latest",
-    "migrate:test": "knex migrate:latest --env testing",
-    "migrate:rollback": "knex migrate:rollback",
-    "migrate:rollback:test": "knex migrate:rollback  --env testing",
+    "db:init": "knex migrate:rollback && knex migrate:latest",
+    "db:init:test": "knex migrate:rollback && knex migrate:latest --env testing",
     "seed": "knex seed:run",
     "seed:test": "knex seed:run --env testing",
     "test": "cross-env DB_ENV=testing jest --watch --verbose"
@@ -21,6 +19,7 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "helmet": "^3.20.0",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.19.1",
     "pg": "^7.12.0"
   },

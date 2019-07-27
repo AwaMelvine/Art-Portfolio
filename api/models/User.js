@@ -11,8 +11,8 @@ export default {
     },
 
     async insert(user) {
-        await db(table).insert(user);
-        return this.find();
+        const [newUser] = await db(table).insert(user).returning('*');
+        return newUser;
     },
 
     async update(id, changes) {
