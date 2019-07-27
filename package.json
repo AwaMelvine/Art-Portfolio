@@ -12,6 +12,7 @@
     "test": "cross-env DB_ENV=testing jest --watch --verbose"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.4.4",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "cross-env": "^5.2.0",
