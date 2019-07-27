@@ -11,7 +11,8 @@
     "migrate:rollback": "knex migrate:rollback",
     "migrate:rollback:test": "knex migrate:rollback  --env testing",
     "seed": "knex seed:run",
-    "seed:test": "knex seed:run --env testing"
+    "seed:test": "knex seed:run --env testing",
+    "test": "cross-env DB_ENV=testing jest --watch --verbose"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
