@@ -1,15 +1,14 @@
 {
   "name": "art-portfolio",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "api/server.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec babel-node -- index.js",
-    "start": "node index.js",
+    "build": "rimraf build && babel ./api -d ./build -s",
+    "start": "node ./build/server.js",
+    "dev": "nodemon --exec babel-node -- ./api/server.js",
     "db:init": "knex migrate:rollback && knex migrate:latest",
     "db:init:test": "knex migrate:rollback && knex migrate:latest --env testing",
-    "seed": "knex seed:run",
-    "seed:test": "knex seed:run --env testing",
     "test": "cross-env DB_ENV=testing jest --watch --verbose"
   },
   "dependencies": {
@@ -23,6 +22,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.19.1",
     "pg": "^7.12.0",
+    "rimraf": "^2.6.3",
     "validator": "^11.1.0"
   },
   "devDependencies": {
