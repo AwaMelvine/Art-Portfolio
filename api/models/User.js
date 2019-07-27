@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import db from '../db/dbConfig';
 
 const table = 'users';
