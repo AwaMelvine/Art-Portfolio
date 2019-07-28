@@ -23,7 +23,7 @@ export default {
     },
 
     async update(id, changes) {
-        return await db(table).where({ id }).update(changes);
+        return await db(table).where({ id }).update(changes).returning('*');
     },
 
     async remove(id) {
