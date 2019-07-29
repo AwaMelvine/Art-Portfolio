@@ -9,7 +9,8 @@
     "dev": "nodemon --exec babel-node -- ./api/server.js",
     "db:init": "knex migrate:rollback && knex migrate:latest",
     "db:init:test": "knex migrate:rollback && knex migrate:latest --env testing",
-    "test": "cross-env DB_ENV=testing jest --watch --verbose"
+    "test": "cross-env DB_ENV=testing jest --watch --verbose",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
