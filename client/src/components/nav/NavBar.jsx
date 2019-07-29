@@ -1,11 +1,14 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
+  -webkit-box-shadow: -1px 3px 5px -4px rgba(0, 0, 0, 0.66);
+  -moz-box-shadow: -1px 3px 5px -4px rgba(0, 0, 0, 0.66);
+  box-shadow: -1px 3px 5px -4px rgba(0, 0, 0, 0.66);
 `;
 
 const NavWrapper = styled.div`
@@ -29,10 +32,10 @@ const NavWrapper = styled.div`
 
 const NavMenu = styled.nav`
   display: flex;
-  width: 300px;
+  width: 500px;
   text-align: center;
 
-  a {
+  & > a {
     flex: 1;
     text-align: center;
     display: block;
@@ -42,11 +45,52 @@ const NavMenu = styled.nav`
     font-family: "Nunito", sans-serif;
     font-size: 1.15rem;
     transition: all 0.2s ease-out;
+    position: relative;
 
     &:hover {
       background: #ecf9fb;
       color: #00bcd4;
       transition: all 0.2s ease-in;
+
+      .dropdown {
+        opacity: 1;
+        right: 0;
+        left: 0;
+        top: 66px;
+        transition: all 0.2s ease-in;
+      }
+    }
+
+    .dropdown {
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      left: 0;
+      top: 70px;
+      list-style: none;
+      margin: 0px;
+      padding: 0px;
+      transition: all 0.2s ease-out;
+
+      a {
+        display: block;
+        min-width: 100%;
+        text-align: left;
+        text-decoration: none;
+        color: #444;
+        font-size: 1rem;
+        padding: 0.6rem;
+        border-left: 1px solid #e7e7e7;
+        border-bottom: 1px solid #e7e7e7;
+        border-right: 1px solid #e7e7e7;
+
+        &.logout {
+          color: red;
+        }
+        &:hover {
+          background: #d8d7d7;
+        }
+      }
     }
   }
 `;
@@ -62,6 +106,15 @@ const NavBar = () => {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/login">Login</NavLink>
           <NavLink to="/register">Register</NavLink>
+          <NavLink to="/register">
+            Awa
+            <ul className="dropdown">
+              <Link to="/">My Profile</Link>
+              <Link className="logout" to="/login">
+                logout
+              </Link>
+            </ul>
+          </NavLink>
         </NavMenu>
       </NavWrapper>
     </StyledHeader>
