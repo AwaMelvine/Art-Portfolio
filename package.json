@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "api/server.js",
   "license": "MIT",
+  "engines": {
+    "node": "10.15.3"
+  },
   "scripts": {
     "build": "rimraf build && babel ./api -d ./build -s",
     "start": "node ./build/server.js",
