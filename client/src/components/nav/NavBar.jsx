@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledHeader = styled.header`
@@ -72,7 +72,7 @@ const NavMenu = styled.nav`
       padding: 0px;
       transition: all 0.2s ease-out;
 
-      a {
+      span {
         display: block;
         min-width: 100%;
         text-align: left;
@@ -109,10 +109,10 @@ const NavBar = () => {
           <NavLink to="/register">
             Awa
             <ul className="dropdown">
-              <Link to="/">My Profile</Link>
-              <Link className="logout" to="/login">
+              <span to="/">My Profile</span>
+              <span className="logout" to="/login">
                 logout
-              </Link>
+              </span>
             </ul>
           </NavLink>
         </NavMenu>
