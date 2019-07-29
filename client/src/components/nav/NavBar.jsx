@@ -6,7 +6,6 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid green;
 `;
 
 const NavWrapper = styled.div`
@@ -29,7 +28,6 @@ const NavWrapper = styled.div`
 `;
 
 const NavMenu = styled.nav`
-  border: 1px dashed red;
   display: flex;
   width: 300px;
   text-align: center;
@@ -37,15 +35,18 @@ const NavMenu = styled.nav`
   a {
     flex: 1;
     text-align: center;
-    border: 1px solid red;
     display: block;
-    padding: 1.2rem;
+    padding: 1.3rem;
     text-decoration: none;
-    color: inherit;
+    color: #444;
+    font-family: "Nunito", sans-serif;
+    font-size: 1.15rem;
+    transition: all 0.2s ease-out;
 
     &:hover {
       background: #ecf9fb;
       color: #00bcd4;
+      transition: all 0.2s ease-in;
     }
   }
 `;
