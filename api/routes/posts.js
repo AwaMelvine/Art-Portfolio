@@ -6,12 +6,13 @@ import {
     updatePost,
     deletePost
 } from '../controllers/posts';
+import { validateCreate, validateUpdate, validatePostId } from '../helpers/validatePost';
 const router = new Router();
 
 router.get('/', getPosts);
-router.get('/:id', getPostById);
-router.post('/', addPost);
-router.put('/:id', updatePost);
-router.delete('/:id', deletePost);
+router.get('/:id', validatePostId, getPostById);
+router.post('/', validateCreate, addPost);
+router.put('/:id', validatePostId, validateUpdate, updatePost);
+router.delete('/:id', validatePostId, deletePost);
 
 export default router;
