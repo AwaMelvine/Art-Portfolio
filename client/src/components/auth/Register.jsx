@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { registerUser } from "../../store/actions/users";
 
 class Register extends Component {
   state = {
@@ -18,6 +20,7 @@ class Register extends Component {
   };
   submit = e => {
     e.preventDefault();
+    this.props.registerUser(this.state.data);
   };
   render() {
     return (
@@ -56,4 +59,7 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default connect(
+  null,
+  { registerUser }
+)(Register);
