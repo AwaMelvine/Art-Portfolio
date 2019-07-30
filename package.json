@@ -9,7 +9,7 @@
   "scripts": {
     "build": "rimraf build && babel ./api -d ./build -s",
     "start": "node ./build/server.js",
-    "dev": "nodemon --exec babel-node -- ./api/server.js",
+    "dev": "concurrently \"nodemon --exec babel-node -- ./api/server.js\" \"cd client && npm run start\" --kill-others",
     "db:init": "knex migrate:rollback && knex migrate:latest",
     "db:init:test": "knex migrate:rollback && knex migrate:latest --env testing",
     "test": "cross-env DB_ENV=testing jest --watch --verbose",
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
+    "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "cross-env": "^5.2.0",
@@ -26,9 +27,12 @@
     "faker": "^4.1.0",
     "helmet": "^3.20.0",
     "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^2.2.0",
     "knex": "^0.19.1",
     "pg": "^7.12.0",
+    "react-router-dom": "^5.0.1",
     "rimraf": "^2.6.3",
+    "styled-components": "^4.3.2",
     "validator": "^11.1.0"
   },
   "devDependencies": {
@@ -36,6 +40,7 @@
     "@babel/core": "^7.5.5",
     "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
+    "concurrently": "^4.1.1",
     "eslint": "^6.1.0",
     "eslint-plugin-react": "^7.14.3",
     "jest": "^24.8.0",
