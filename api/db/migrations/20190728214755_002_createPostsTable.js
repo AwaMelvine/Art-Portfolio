@@ -4,6 +4,7 @@ exports.up = function (knex) {
         table.string('title').unique().notNullable();
         table.integer('user_id')
             .unsigned()
+            .notNullable()
             .references('id')
             .inTable('users')
             .onDelete('CASCADE')
