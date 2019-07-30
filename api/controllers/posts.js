@@ -1,4 +1,5 @@
 import Post from '../models/Post';
+import Like from '../models/Like';
 
 
 export const getPosts = async (req, res) => {
@@ -28,6 +29,22 @@ export const addPost = async (req, res) => {
         if (error.code === '23505' && error.constraint === 'posts_title_unique') {
             return res.status(400).json({ errors: { title: 'Post title already exists' } })
         }
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+export const likePost = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user_id = 1; // req.user.id;
+        const newLike = {
+            user_id,
+            post_id: id
+        };
+        const likes = await Like.like(newLike);
+        res.status(200).json({ data: likes });
+    } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
