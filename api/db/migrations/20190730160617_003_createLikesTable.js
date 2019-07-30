@@ -16,6 +16,7 @@ exports.up = function (knex) {
             .inTable('users')
             .onDelete('CASCADE')
             .onUpdate('CASCADE');
+        table.unique(['post_id', 'user_id']);
     });
 };
 
