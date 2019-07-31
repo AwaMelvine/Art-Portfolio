@@ -1,6 +1,11 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/User';
+import db from '../db/dbConfig';
+
+beforeEach(async () => {
+    await db('users').truncate();
+})
 
 
 export const createToken = (user) => {
@@ -28,7 +33,7 @@ export const registerUser = async (req, res) => {
         user.password = bcrypt.hashSync(user.password, 12);
         const newUser = await User.insert(user);
         const token = createToken(newUser);
-        res.status(201).json({ data: token });
+        res.status(201).json({ data: { ...newUser, token } });
     } catch (error) {
         if (error.code === '23505') {
             return res.status(400).json({ errors: [{ email: 'Email already taken' }] });
