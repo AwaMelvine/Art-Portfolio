@@ -3,6 +3,8 @@ import faker from 'faker';
 import server from '../server';
 import request from 'supertest';
 import db from "../db/dbConfig";
+import Post from "../models/Post";
+import User from "../models/User";
 
 
 const user = {
@@ -122,7 +124,6 @@ describe('Post Endpoints', () => {
                         .expect(400)
                         .expect('Content-Type', /json/)
                         .then(res => {
-                            console.log(res.body);
                             expect(res.body.errors[0].user_id).toEqual('Valid user ID required');
                         });
                 });
@@ -171,4 +172,55 @@ describe('Post Endpoints', () => {
 
 
     });
+
+    describe('[GET]: /api/posts Endpoints', () => {
+        it('returns a json object', () => {
+            return request(server)
+                .get('/api/posts')
+                .expect(200)
+                .expect('Content-Type', /json/);
+        });
+        it('returns array of all available posts', async () => {
+            const newUser = { ...user };
+            delete newUser.passwordConf;
+            await User.insert(newUser);
+            await Post.insert(firstPost);
+            return request(server)
+                .get('/api/posts')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .then(res => {
+                    expect(res.body.data.length).toEqual(1);
+                });
+        });
+    });
+
+    describe('[GET]: /api/posts/:id get by id', () => {
+        it('returns a post given the post id', async () => {
+            const newUser = { ...user };
+            delete newUser.passwordConf;
+            await User.insert(newUser);
+            await Post.insert(firstPost);
+            return request(server)
+                .get(`/api/posts/1`)
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .then(res => {
+                    expect(res.body.data.title).toEqual(firstPost.title);
+                });
+        });
+        it('returns an error if invalid id provided', async () => {
+            const newUser = { ...user };
+            delete newUser.passwordConf;
+            await User.insert(newUser);
+            await Post.insert(firstPost);
+            return request(server)
+                .get(`/api/posts/gibberishId`)
+                .expect('Content-Type', /json/)
+                .then(res => {
+                    expect(res.body.errors).toEqual('invalid post id');
+                });
+        });
+    });
+
 });
