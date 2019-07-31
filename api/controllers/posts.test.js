@@ -24,6 +24,10 @@ const firstPost = {
     image: faker.image.food()
 };
 
+const changes = {
+    title: 'This is the (updated) first post',
+};
+
 const secondPost = {
     id: 2,
     title: 'This is the second post',
@@ -221,6 +225,32 @@ describe('Post Endpoints', () => {
                     expect(res.body.errors).toEqual('invalid post id');
                 });
         });
+    });
+
+    describe('[PUT]: /api/posts/:id', () => {
+        it('updates a post', () => {
+            return request(server)
+                .post('/api/register')
+                .send(user)
+                .then(res => {
+                    token = res.body.data.token;
+                    return request(server)
+                        .post(`/api/posts`)
+                        .send(firstPost)
+                        .set('Authorization', token)
+                        .then(res => {
+                            return request(server)
+                                .put(`/api/posts/1`)
+                                .send(changes)
+                                .set('Authorization', token)
+                                .expect(200)
+                                .then(res => {
+                                    expect(res.body.data[0].title).toEqual(changes.title);
+                                });
+                        });
+                });
+        });
+
     });
 
 });
