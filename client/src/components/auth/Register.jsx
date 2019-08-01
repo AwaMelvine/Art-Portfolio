@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { registerUser } from "../../store/actions/users";
 
@@ -7,6 +8,7 @@ const FormWrapper = styled.div`
   width: 30%;
   margin: 2rem auto;
   border: 1px solid #e8e8e8;
+  border-radius: 5px;
   background: white;
   padding: 2rem;
   color: #555;
@@ -14,10 +16,20 @@ const FormWrapper = styled.div`
 
   h2 {
     text-align: center;
+    margin-top: 0px;
   }
 
   div {
     margin-bottom: 0.35rem;
+    p {
+      text-align: center;
+      a {
+        color: inherit;
+        &:hover {
+          color: #4880d6;
+        }
+      }
+    }
 
     label {
       display: block;
@@ -116,6 +128,11 @@ class Register extends Component {
           </div>
           <div>
             <button type="submit">Register</button>
+          </div>
+          <div>
+            <p>
+              Or <Link to="/login">Login</Link>
+            </p>
           </div>
         </form>
       </FormWrapper>
