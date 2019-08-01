@@ -18,3 +18,14 @@ export const registerUser = user => dispatch => {
         });
 };
 
+export const loginUser = user => dispatch => {
+    return Axios.post('/api/login', user)
+        .then(res => {
+            localStorage.setItem('token', res.data.data);
+            const user = jwtDecode(res.data.data);
+            dispatch(setUser(user));
+        })
+        .catch(error => {
+        });
+};
+
