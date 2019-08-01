@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { loginUser } from "../../store/actions/users";
+import { loginUser, setErrorMessages } from "../../store/actions/users";
 import { FormWrapper } from "./_auth";
 
 class Login extends Component {
@@ -19,13 +19,30 @@ class Login extends Component {
   };
   submit = e => {
     e.preventDefault();
-    this.props.loginUser(this.state.data);
+    this.props.setErrorMessages(null);
+    this.props.loginUser(this.state.data).then(() => {
+      if (!this.props.errors) {
+        this.props.history.push("/");
+      }
+    });
   };
   render() {
+    const { errors } = this.props;
+    if (errors) {
+      console.log(errors);
+    }
+
     return (
       <FormWrapper>
         <h2>Login</h2>
         <form method="post" onSubmit={this.submit}>
+          {errors && (
+            <ul className="errors">
+              {errors.map(error => (
+                <li key={error}>{error}</li>
+              ))}
+            </ul>
+          )}
           <div>
             <label>Username</label>
             <input type="text" name="username" onChange={this.change} />
@@ -48,7 +65,11 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  errors: state.users.errors
+});
+
 export default connect(
-  null,
-  { loginUser }
+  mapStateToProps,
+  { loginUser, setErrorMessages }
 )(Login);

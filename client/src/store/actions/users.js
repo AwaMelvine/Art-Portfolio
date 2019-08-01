@@ -1,10 +1,15 @@
 import Axios from "axios";
 import jwtDecode from 'jwt-decode';
-import { SET_USER } from "./types";
+import { SET_USER, SET_ERROR_MESSAGES } from "./types";
 
 const setUser = (user) => ({
     type: SET_USER,
     payload: user
+});
+
+export const setErrorMessages = (errors) => ({
+    type: SET_ERROR_MESSAGES,
+    payload: errors
 });
 
 export const registerUser = user => dispatch => {
@@ -15,6 +20,11 @@ export const registerUser = user => dispatch => {
             dispatch(setUser(user));
         })
         .catch(error => {
+            const errors = [];
+            for (let [key, value] of Object.entries(error.response.data.errors)) {
+                errors.push(Object.values(value)[0]);
+            }
+            dispatch(setErrorMessages(errors));
         });
 };
 
@@ -26,6 +36,11 @@ export const loginUser = user => dispatch => {
             dispatch(setUser(user));
         })
         .catch(error => {
+            const errors = [];
+            for (let [key, value] of Object.entries(error.response.data.errors)) {
+                errors.push(Object.values(value)[0]);
+            }
+            dispatch(setErrorMessages(errors));
         });
 };
 

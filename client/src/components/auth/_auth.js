@@ -15,6 +15,20 @@ export const FormWrapper = styled.div`
     margin-top: 0px;
   }
 
+  ul.errors {
+    list-style: none;
+    padding-left: .4rem;
+    border: 1px solid orange;
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+
   div {
     margin-bottom: 0.35rem;
     p {
