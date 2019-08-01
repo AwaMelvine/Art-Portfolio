@@ -28,9 +28,6 @@ class Login extends Component {
   };
   render() {
     const { errors } = this.props;
-    if (errors) {
-      console.log(errors);
-    }
 
     return (
       <FormWrapper>

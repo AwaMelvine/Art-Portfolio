@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { registerUser } from "../../store/actions/users";
+import { registerUser, setErrorMessages } from "../../store/actions/users";
 import { FormWrapper } from "./_auth";
 
 class Register extends Component {
@@ -22,12 +22,25 @@ class Register extends Component {
   };
   submit = e => {
     e.preventDefault();
-    this.props.registerUser(this.state.data);
+    this.props.setErrorMessages(null);
+    this.props.registerUser(this.state.data).then(() => {
+      if (!this.props.errors) {
+        this.props.history.push("/");
+      }
+    });
   };
   render() {
+    const { errors } = this.props;
     return (
       <FormWrapper>
         <h2>Register</h2>
+        {errors && (
+          <ul className="errors">
+            {errors.map(error => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
         <form method="post" onSubmit={this.submit}>
           <div>
             <label>Username</label>
@@ -48,7 +61,7 @@ class Register extends Component {
           <div>
             <label>Account Type</label>
             <select name="role" onChange={this.change} defaultValue="">
-              <option value="" disabled >
+              <option value="" disabled>
                 -- select --
               </option>
               <option value="user">User</option>
@@ -69,7 +82,11 @@ class Register extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  errors: state.users.errors
+});
+
 export default connect(
-  null,
-  { registerUser }
+  mapStateToProps,
+  { registerUser, setErrorMessages }
 )(Register);
