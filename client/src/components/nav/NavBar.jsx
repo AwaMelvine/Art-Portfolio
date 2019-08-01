@@ -6,6 +6,7 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #ffffff;
   -webkit-box-shadow: -1px 3px 5px -4px rgba(0, 0, 0, 0.66);
   -moz-box-shadow: -1px 3px 5px -4px rgba(0, 0, 0, 0.66);
   box-shadow: -1px 3px 5px -4px rgba(0, 0, 0, 0.66);
@@ -24,7 +25,7 @@ const NavWrapper = styled.div`
     justify-content: center;
 
     img {
-      height: 80%;
+      height: 60%;
       width: auto;
     }
   }
@@ -32,7 +33,7 @@ const NavWrapper = styled.div`
 
 const NavMenu = styled.nav`
   display: flex;
-  width: 500px;
+  width: 300px;
   text-align: center;
 
   & > a {
@@ -57,6 +58,7 @@ const NavMenu = styled.nav`
         right: 0;
         left: 0;
         top: 66px;
+        background: white;
         transition: all 0.2s ease-in;
       }
     }
@@ -95,30 +97,48 @@ const NavMenu = styled.nav`
   }
 `;
 
-const NavBar = () => {
-  return (
-    <StyledHeader>
-      <NavWrapper>
-        <div className="logo">
-          <img src={require("../../assets/images/logo.png")} alt="Logo" />
-        </div>
-        <NavMenu>
-          <NavLink to="/">Home</NavLink>
+class NavBar extends React.Component {
+  logout = e => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
+  render() {
+    const token = localStorage.getItem("token");
+    let authLinks = "";
+    if (token) {
+      authLinks = (
+        <NavLink to="#">
+          Awa
+          <ul className="dropdown">
+            <span to="/">My Profile</span>
+            <span className="logout" onClick={this.logout}>
+              logout
+            </span>
+          </ul>
+        </NavLink>
+      );
+    } else {
+      authLinks = (
+        <>
           <NavLink to="/login">Login</NavLink>
           <NavLink to="/register">Register</NavLink>
-          <NavLink to="/register">
-            Awa
-            <ul className="dropdown">
-              <span to="/">My Profile</span>
-              <span className="logout" to="/login">
-                logout
-              </span>
-            </ul>
-          </NavLink>
-        </NavMenu>
-      </NavWrapper>
-    </StyledHeader>
-  );
-};
+        </>
+      );
+    }
+    return (
+      <StyledHeader>
+        <NavWrapper>
+          <div className="logo">
+            <img src={require("../../assets/images/logo.png")} alt="Logo" />
+          </div>
+          <NavMenu>
+            <NavLink to="/">Home</NavLink>
+            {authLinks}
+          </NavMenu>
+        </NavWrapper>
+      </StyledHeader>
+    );
+  }
+}
 
 export default NavBar;

@@ -5,4 +5,10 @@
 body {
   margin: 0px;
   padding: 0px;
+  background-image: url("./assets/email-pattern/email-pattern.png");
 }
+
+/* Available Fonts */
+/* font-family: 'Lora', serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Nunito', sans-serif; */
