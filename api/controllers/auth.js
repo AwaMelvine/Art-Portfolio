@@ -28,6 +28,7 @@ export const registerUser = async (req, res) => {
         const user = req.body;
         user.password = bcrypt.hashSync(user.password, 12);
         const newUser = await User.insert(user);
+        console.log(newUser)
         const token = createToken(newUser);
         res.status(201).json({ data: { ...newUser, token } });
     } catch (error) {

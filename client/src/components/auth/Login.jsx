@@ -22,7 +22,7 @@ class Login extends Component {
     this.props.setErrorMessages(null);
     this.props.loginUser(this.state.data).then(() => {
       if (!this.props.errors) {
-        this.props.history.push("/");
+        window.location.href = "/";
       }
     });
   };

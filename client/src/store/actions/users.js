@@ -15,8 +15,8 @@ export const setErrorMessages = (errors) => ({
 export const registerUser = user => dispatch => {
     return Axios.post('/api/register', user)
         .then(res => {
-            localStorage.setItem('token', res.data.data);
-            const user = jwtDecode(res.data.data);
+            localStorage.setItem('token', res.data.data.token);
+            const user = jwtDecode(res.data.data.token);
             dispatch(setUser(user));
         })
         .catch(error => {
