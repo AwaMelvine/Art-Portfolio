@@ -6,15 +6,31 @@ const table = 'posts';
 export default {
     async get(id = null) {
         if (id) {
-            const post = await db(table).where({ id }).first();
+            const post = await db.select('posts.*', 'users.username')
+                .from('posts')
+                .leftJoin('likes', 'posts.id', 'likes.post_id')
+                .leftJoin('users', 'posts.user_id', 'users.id')
+                .count('likes.post_id', { as: 'likes' })
+                .groupBy('posts.id', 'users.username').where({ 'posts.id': id }).first();
             return post;
         }
-        const posts = await db(table);
+        const posts = await db.select('posts.*', 'users.username')
+            .from('posts')
+            .leftJoin('likes', 'posts.id', 'likes.post_id')
+            .leftJoin('users', 'posts.user_id', 'users.id')
+            .count('likes.post_id', { as: 'likes' })
+            .groupBy('posts.id', 'users.username');
         return posts;
     },
 
     async find(columns) {
-        return await db(table).where(columns).first();
+        const posts = await db.select('posts.*', 'users.username')
+            .from('posts')
+            .leftJoin('likes', 'posts.id', 'likes.post_id')
+            .leftJoin('users', 'posts.user_id', 'users.id')
+            .count('likes.post_id', { as: 'likes' })
+            .groupBy('posts.id', 'users.username').where(columns).first();
+        return posts;
     },
 
     async insert(post) {
@@ -23,10 +39,12 @@ export default {
     },
 
     async update(id, changes) {
-        return await db(table).where({ id }).update(changes).returning('*');
+        const updatedPost = await db(table).where({ id }).update(changes).returning('*');
+        return updatedPost;
     },
 
     async remove(id) {
-        return await db(table).where({ id }).del();
+        const count = await db(table).where({ id }).del();
+        return count;
     }
 };

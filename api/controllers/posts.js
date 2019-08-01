@@ -7,6 +7,7 @@ export const getPosts = async (req, res) => {
         const posts = await Post.get();
         res.status(200).json({ data: posts });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
@@ -36,7 +37,7 @@ export const addPost = async (req, res) => {
 export const likePost = async (req, res) => {
     try {
         const { id } = req.params;
-        const user_id = 1; // req.user.id;
+        const user_id = req.user.id;
         const newLike = {
             user_id,
             post_id: id
