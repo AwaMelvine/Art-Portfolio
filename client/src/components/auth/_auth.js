@@ -15,7 +15,7 @@ export const FormWrapper = styled.div`
     margin-top: 0px;
   }
 
-  ul.errors {
+  ul.msg {
     list-style: none;
     padding-left: .4rem;
     border: 1px solid orange;
@@ -24,10 +24,21 @@ export const FormWrapper = styled.div`
     margin-bottom: 1rem;
     border: 1px solid transparent;
     border-radius: .25rem;
-    color: #721c24;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
+
+    &.error {
+      color: #721c24;
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+    }
+
+    &.success {
+      color: #0c5460;
+      background-color: #d1ecf1;
+      border-color: #bee5eb;
+    }
   }
+
+
 
   div {
     margin-bottom: 0.35rem;

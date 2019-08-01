@@ -12,7 +12,8 @@ class Register extends Component {
       password: "",
       passwordConf: "",
       role: ""
-    }
+    },
+    message: ""
   };
   change = e => {
     this.setState({
@@ -25,20 +26,35 @@ class Register extends Component {
     this.props.setErrorMessages(null);
     this.props.registerUser(this.state.data).then(() => {
       if (!this.props.errors) {
-        this.props.history.push("/");
+        this.setState({
+          ...this.state,
+          message: "<b>Login Success:</b> Redirecting soon..."
+        });
+
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
       }
     });
   };
   render() {
     const { errors } = this.props;
+    const { message } = this.state;
     return (
       <FormWrapper>
         <h2>Register</h2>
         {errors && (
-          <ul className="errors">
+          <ul className="msg error">
             {errors.map(error => (
               <li key={error}>{error}</li>
             ))}
+          </ul>
+        )}
+        {message && (
+          <ul className="msg success">
+            <li>
+              <div dangerouslySetInnerHTML={{ __html: message }} />
+            </li>
           </ul>
         )}
         <form method="post" onSubmit={this.submit}>

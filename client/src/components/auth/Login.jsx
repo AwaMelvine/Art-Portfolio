@@ -9,8 +9,12 @@ class Login extends Component {
     data: {
       username: "",
       password: ""
-    }
+    },
+    message: ""
   };
+  componentDidMount() {
+    this.props.setErrorMessages(null);
+  }
   change = e => {
     this.setState({
       ...this.state,
@@ -22,22 +26,37 @@ class Login extends Component {
     this.props.setErrorMessages(null);
     this.props.loginUser(this.state.data).then(() => {
       if (!this.props.errors) {
-        window.location.href = "/";
+        this.setState({
+          ...this.state,
+          message: "<b>Login Success:</b> Redirecting soon..."
+        });
+
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
       }
     });
   };
   render() {
     const { errors } = this.props;
+    const { message } = this.state;
 
     return (
       <FormWrapper>
         <h2>Login</h2>
         <form method="post" onSubmit={this.submit}>
           {errors && (
-            <ul className="errors">
+            <ul className="msg error">
               {errors.map(error => (
                 <li key={error}>{error}</li>
               ))}
+            </ul>
+          )}
+          {message && (
+            <ul className="msg success">
+              <li>
+                <div dangerouslySetInnerHTML={{ __html: message }} />
+              </li>
             </ul>
           )}
           <div>
