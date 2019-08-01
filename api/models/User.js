@@ -14,7 +14,8 @@ export default {
     },
 
     async find(columns) {
-        return await db(table).where(columns).first();
+        const users = await db(table).where(columns).first();
+        return users;
     },
 
     async insert(user) {
@@ -23,7 +24,7 @@ export default {
     },
 
     async update(id, changes) {
-        return await db(table).where({ id }).update(changes);
+        return await db(table).where({ id }).update(changes).returning('*');
     },
 
     async remove(id) {

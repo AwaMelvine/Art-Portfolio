@@ -3,10 +3,6 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User';
 import db from '../db/dbConfig';
 
-beforeEach(async () => {
-    await db('users').truncate();
-})
-
 
 export const createToken = (user) => {
     const payload = {

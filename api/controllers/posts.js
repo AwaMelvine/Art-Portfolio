@@ -44,7 +44,6 @@ export const likePost = async (req, res) => {
         const likes = await Like.like(newLike);
         res.status(200).json({ data: likes });
     } catch (error) {
-        console.log(error)
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };

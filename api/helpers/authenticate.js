@@ -6,6 +6,7 @@ export const authenticate = async (req, res, next) => {
     try {
         const token = req.headers.authorization;
 
+
         if (!token) {
             return res.status(401).json({ error: 'You need to login first' });
         }
@@ -26,13 +27,13 @@ export const authenticate = async (req, res, next) => {
 export const artistsOnly = (req, res, next) => {
     try {
         const { user } = req;
+        
         if (user && user.role === 'artist') {
             next();
         } else {
             return res.status(401).json({ error: 'Unauthorized!' })
         }
     } catch (error) {
-        console.log(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };    

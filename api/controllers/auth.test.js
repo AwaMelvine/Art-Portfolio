@@ -19,8 +19,12 @@ const secondUser = {
 };
 
 
-afterAll(async () => {
-    // await db('users').truncate();
+beforeEach(async () => {
+    await db.raw('TRUNCATE TABLE users CASCADE');
+});
+
+afterEach(async () => {
+    await db.raw('TRUNCATE TABLE users CASCADE');
 });
 
 describe('Auth Endpoints', () => {
