@@ -6,6 +6,7 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #ffffff;
   -webkit-box-shadow: -1px 3px 5px -4px rgba(0, 0, 0, 0.66);
   -moz-box-shadow: -1px 3px 5px -4px rgba(0, 0, 0, 0.66);
   box-shadow: -1px 3px 5px -4px rgba(0, 0, 0, 0.66);

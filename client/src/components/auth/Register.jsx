@@ -1,6 +1,67 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import styled from "styled-components";
 import { registerUser } from "../../store/actions/users";
+
+const FormWrapper = styled.div`
+  width: 30%;
+  margin: 2rem auto;
+  border: 1px solid #e8e8e8;
+  background: white;
+  padding: 2rem;
+  color: #555;
+  font-family: "Lora", serif;
+
+  h2 {
+    text-align: center;
+  }
+
+  div {
+    margin-bottom: 0.35rem;
+
+    label {
+      display: block;
+    }
+
+    input,
+    select {
+      width: 100%;
+      font-size: 1.1rem;
+      padding: 0.8rem 1rem;
+      margin: 8px 0;
+      font-family: "Lora", serif;
+      color: #555;
+      outline: none;
+      border: 1px solid #e6e6e6;
+      border-radius: 4px;
+
+      &:focus {
+        border: 1px solid #4880d6;
+      }
+    }
+    select {
+      height: 48px;
+    }
+    button[type="submit"] {
+      background: #5858b7;
+      color: white;
+      border: none;
+      text-align: center;
+      display: inline-block;
+      font-size: 1.2rem;
+      font-family: "Lora", serif;
+      margin: 4px 2px;
+      padding: 0.8rem 1.2rem;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 4px;
+      outline: none;
+      &:hover {
+        background: #3f3f8c;
+      }
+    }
+  }
+`;
 
 class Register extends Component {
   state = {
@@ -24,7 +85,7 @@ class Register extends Component {
   };
   render() {
     return (
-      <div>
+      <FormWrapper>
         <h2>Register</h2>
         <form method="post" onSubmit={this.submit}>
           <div>
@@ -46,6 +107,9 @@ class Register extends Component {
           <div>
             <label>Account Type</label>
             <select name="role" onChange={this.change}>
+              <option value="" disabled selected>
+                -- select --
+              </option>
               <option value="user">User</option>
               <option value="artist">Artist</option>
             </select>
@@ -54,7 +118,7 @@ class Register extends Component {
             <button type="submit">Register</button>
           </div>
         </form>
-      </div>
+      </FormWrapper>
     );
   }
 }
