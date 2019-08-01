@@ -252,5 +252,29 @@ describe('Post Endpoints', () => {
         });
 
     });
+    describe('[DELETE]: /api/posts/:id', () => {
+        it('deletes a post', () => {
+            return request(server)
+                .post('/api/register')
+                .send(user)
+                .then(res => {
+                    token = res.body.data.token;
+                    return request(server)
+                        .post(`/api/posts`)
+                        .send(firstPost)
+                        .set('Authorization', token)
+                        .then(res => {
+                            return request(server)
+                                .delete(`/api/posts/1`)
+                                .set('Authorization', token)
+                                .expect(200)
+                                .then(res => {
+                                    expect(res.body.data).toEqual(1);
+                                });
+                        });
+                });
+        });
+
+    });
 
 });

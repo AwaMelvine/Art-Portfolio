@@ -27,6 +27,7 @@ export const authenticate = async (req, res, next) => {
 export const artistsOnly = (req, res, next) => {
     try {
         const { user } = req;
+        
         if (user && user.role === 'artist') {
             next();
         } else {

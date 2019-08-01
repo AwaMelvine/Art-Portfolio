@@ -16,6 +16,6 @@ router.get('/:id', validatePostId, getPostById);
 router.post('/', authenticate, artistsOnly, validateCreate, addPost);
 router.post('/likes/:id', authenticate, validatePostId, likePost);
 router.put('/:id', authenticate, artistsOnly, validatePostId, validateUpdate, updatePost);
-router.delete('/:id', artistsOnly, authenticate, validatePostId, deletePost);
+router.delete('/:id', authenticate, artistsOnly, validatePostId, deletePost);
 
 export default router;
