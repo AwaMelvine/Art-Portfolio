@@ -24,8 +24,9 @@ export const getPostById = async (req, res) => {
 
 export const addPost = async (req, res) => {
     try {
-        const post = await Post.insert(req.body);
-        res.status(201).json({ data: post });
+        await Post.insert(req.body);
+        const allPosts = await Post.get();
+        res.status(201).json({ data: allPosts });
     } catch (error) {
         if (error.code === '23505' && error.constraint === 'posts_title_unique') {
             return res.status(400).json({ errors: { title: 'Post title already exists' } })

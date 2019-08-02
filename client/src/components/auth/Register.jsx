@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { registerUser, setErrorMessages } from "../../store/actions/users";
+import { registerUser } from "../../store/actions/users";
 import { FormWrapper } from "./_auth";
+import { setErrorMessages } from "../../store/actions/errors";
 
 class Register extends Component {
   state = {
@@ -15,6 +16,9 @@ class Register extends Component {
     },
     message: ""
   };
+  componentDidMount() {
+    this.props.setErrorMessages(null);
+  }
   change = e => {
     this.setState({
       ...this.state,
@@ -99,7 +103,7 @@ class Register extends Component {
 }
 
 const mapStateToProps = state => ({
-  errors: state.users.errors
+  errors: state.errors
 });
 
 export default connect(

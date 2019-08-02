@@ -1,16 +1,13 @@
 import Axios from "axios";
 import jwtDecode from 'jwt-decode';
-import { SET_USER, SET_ERROR_MESSAGES } from "./types";
+import { SET_USER } from "./types";
+import { setErrorMessages } from "./errors";
 
 const setUser = (user) => ({
     type: SET_USER,
     payload: user
 });
 
-export const setErrorMessages = (errors) => ({
-    type: SET_ERROR_MESSAGES,
-    payload: errors
-});
 
 export const registerUser = user => dispatch => {
     return Axios.post('/api/register', user)

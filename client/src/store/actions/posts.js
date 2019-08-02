@@ -6,8 +6,21 @@ const setPosts = (post) => ({
     payload: post
 });
 
-export const fetchPosts = user => dispatch => {
+export const fetchPosts = () => dispatch => {
     return Axios.get('/api/posts')
+        .then(res => {
+            const posts = res.data.data;
+            dispatch(setPosts(posts));
+        })
+        .catch(error => {
+            console.log(error)
+        });
+};
+
+
+
+export const addPost = post => dispatch => {
+    return Axios.post('/api/posts', post)
         .then(res => {
             const posts = res.data.data;
             dispatch(setPosts(posts));

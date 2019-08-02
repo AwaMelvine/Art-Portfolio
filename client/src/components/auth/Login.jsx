@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { loginUser, setErrorMessages } from "../../store/actions/users";
+import { loginUser } from "../../store/actions/users";
+import { setErrorMessages } from "../../store/actions/errors";
 import { FormWrapper } from "./_auth";
 
 class Login extends Component {
@@ -82,7 +83,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  errors: state.users.errors
+  errors: state.errors
 });
 
 export default connect(
