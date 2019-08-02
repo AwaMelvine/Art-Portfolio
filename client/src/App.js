@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import NavBar from './components/nav/NavBar';
-import HomePage from './components/HomePage';
+import HomePage from './components/posts/HomePage';
 
 
 const App = () => (

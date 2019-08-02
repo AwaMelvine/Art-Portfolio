@@ -1,16 +1,16 @@
 import Axios from "axios";
 import { SET_POSTS } from "./types";
 
-const setPost = (post) => ({
+const setPosts = (post) => ({
     type: SET_POSTS,
     payload: post
 });
 
-export const registerUser = user => dispatch => {
-    return Axios.post('/api/register', user)
+export const fetchPosts = user => dispatch => {
+    return Axios.get('/api/posts')
         .then(res => {
-            const post = res.data.data;
-            dispatch(setPost(post));
+            const posts = res.data.data;
+            dispatch(setPosts(posts));
         })
         .catch(error => {
             console.log(error)
